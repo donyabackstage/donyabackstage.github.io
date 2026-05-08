@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donya Arabian — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F0E8;
+    --ink: #1A1410;
+    --gold: #C9A84C;
+    --gold-light: #E8D5A0;
+    --red: #8B1A1A;
+    --warm-gray: #6B6158;
+    --card-bg: #FDFAF4;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,168,76,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 80% at 10% 80%, rgba(139,26,26,0.07) 0%, transparent 50%);
+  }
+
+  .hero-curtain-left,
+  .hero-curtain-right {
+    position: absolute;
+    top: 0;
+    width: 60px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--red) 0%, #5C0F0F 40%, #3A0808 100%);
+    z-index: 2;
+  }
+  .hero-curtain-left { left: 0; clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%); }
+  .hero-curtain-right { right: 0; clip-path: polygon(0 0, 100% 0, 100% 100%, 20% 100%); }
+
+  .hero-curtain-left::after,
+  .hero-curtain-right::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 18px,
+      rgba(0,0,0,0.15) 18px,
+      rgba(0,0,0,0.15) 20px
+    );
+  }
+
+  nav {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: flex-end;
+    gap: 32px;
+    padding: 32px 80px 0;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  nav a {
+    color: var(--warm-gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--gold); }
+
+  .hero-content {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 80px;
+    animation: fadeUp 1s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    animation: fadeUp 1s 0.1s ease both;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 8vw, 96px);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 8px;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--red);
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(14px, 2vw, 20px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--warm-gray);
+    margin-top: 16px;
+    margin-bottom: 40px;
+    animation: fadeUp 1s 0.3s ease both;
+  }
+
+  .hero-divider {
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 40px;
+    animation: fadeUp 1s 0.4s ease both;
+  }
+
+  .hero-tagline {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--warm-gray);
+    max-width: 520px;
+    animation: fadeUp 1s 0.5s ease both;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 16px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 1s 0.6s ease both;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 12px 28px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.25s;
+    cursor: pointer;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-primary { background: var(--ink); color: var(--cream); }
+  .btn-primary:hover { background: var(--red); }
+
+  .btn-outline { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+  .btn-outline:hover { background: var(--ink); color: var(--cream); }
+
+  .hero-bottom {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    padding: 0 0 40px;
+    animation: fadeUp 1s 0.7s ease both;
+  }
+
+  .scroll-hint {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .scroll-hint::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollLine {
+    0%, 100% { opacity: 0.4; transform: scaleY(0.8); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 80px; position: relative; }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 48px;
+  }
+
+  /* ── ABOUT ── */
+  .about { background: var(--ink); color: var(--cream); }
+  .about .section-title { color: var(--cream); }
+  .about .section-label { color: var(--gold); }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+
+  .about-text p {
+    font-size: 15px;
+    line-height: 1.85;
+    color: rgba(245,240,232,0.75);
+    margin-bottom: 20px;
+  }
+  .about-text p:last-child { margin-bottom: 0; }
+
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+  .stat { border-top: 1px solid rgba(201,168,76,0.3); padding-top: 20px; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.5);
+  }
+
+  /* ── EXPERIENCE ── */
+  .experience { background: var(--cream); }
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+    padding: 40px 0;
+    border-bottom: 1px solid rgba(26,20,16,0.1);
+  }
+  .exp-item:first-child { border-top: 1px solid rgba(26,20,16,0.1); }
+
+  .exp-meta { padding-top: 4px; }
+
+  .exp-dates {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .exp-company { font-size: 12px; color: var(--warm-gray); }
+
+  .exp-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .exp-desc { font-size: 14px; line-height: 1.75; color: var(--warm-gray); }
+
+  .exp-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+
+  .tag {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--warm-gray);
+  }
+
+  /* ── SKILLS ── */
+  .skills-section { background: var(--card-bg); border-top: 1px solid rgba(26,20,16,0.08); }
+
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+
+  .skill-card {
+    padding: 36px;
+    border: 1px solid rgba(201,168,76,0.25);
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--gold);
+    transition: height 0.3s ease;
+  }
+
+  .skill-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+  .skill-card:hover::before { height: 100%; }
+
+  .skill-icon { font-size: 28px; margin-bottom: 16px; }
+
+  .skill-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .skill-items { list-style: none; font-size: 13px; line-height: 1.9; color: var(--warm-gray); }
+  .skill-items li::before { content: '— '; color: var(--gold); }
+
+  /* ── CONTACT ── */
+  .contact { background: var(--red); color: var(--cream); text-align: center; }
+  .contact .section-title { color: var(--cream); }
+  .contact .section-label { color: var(--gold-light); }
+
+  .contact-sub {
+    font-size: 15px;
+    color: rgba(245,240,232,0.7);
+    max-width: 480px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+  }
+
+  .contact-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 64px; }
+
+  .contact-link {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(245,240,232,0.3);
+    padding-bottom: 2px;
+    transition: border-color 0.2s;
+  }
+  .contact-link:hover { border-color: var(--gold-light); color: var(--gold-light); }
+
+  .contact .btn-outline { color: var(--cream); border-color: rgba(245,240,232,0.5); }
+  .contact .btn-outline:hover { background: var(--cream); color: var(--red); }
+
+  footer {
+    background: var(--ink);
+    color: rgba(245,240,232,0.35);
+    text-align: center;
+    padding: 24px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 24px 24px 0; gap: 20px; }
+    section { padding: 72px 24px; }
+    .hero-content { padding: 40px 24px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .exp-item { grid-template-columns: 1fr; gap: 8px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .hero-curtain-left, .hero-curtain-right { width: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-curtain-left"></div>
+  <div class="hero-curtain-right"></div>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Production · Media · Theatre</p>
+    <h1 class="hero-name">Donya<br><em>Arabian</em></h1>
+    <p class="hero-title">Aspiring Production Assistant &amp; Media Creator — New York City</p>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline">Self-driven storyteller embedded in New York's Broadway and entertainment community. I produce, film, edit, and create — and I'm ready to bring that energy behind the scenes.</p>
+    <div class="hero-links">
+      <a href="#experience" class="btn btn-primary">View My Work</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="scroll-hint">Scroll</div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <p class="section-label">Who I Am</p>
+  <h2 class="section-title">Broadway obsessive.<br>NYC-based. Camera-ready.</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm Donya — a New York City-based media creator and aspiring production assistant with a passion for live theatre, film, and TV. I run @donyabackstage, a self-produced entertainment brand covering Broadway shows, curtain calls, film and TV releases, and pop culture across TikTok, Instagram, and YouTube.</p>
+      <p>Every piece of content I put out — from scripting and shooting to editing and posting — I handle myself. That hands-on hustle is what drives me toward production work: I want to be the person in the room making things happen.</p>
+      <p>When I'm not at a stage door or behind a camera, I work as a paralegal and victim advocate at a New York law firm, where I've sharpened the organizational discipline and composure under pressure that any great PA needs.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Years Creating Content</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">NYC</div>
+        <div class="stat-label">Based &amp; Available</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Platforms Active</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">M.A.</div>
+        <div class="stat-label">Forensic Psychology, CUNY</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="experience" id="experience">
+  <p class="section-label">What I've Done</p>
+  <h2 class="section-title">Experience</h2>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-dates">2023 – Present</div>
+        <div class="exp-company">Self-Produced</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Content Creator &amp; Producer — @donyabackstage</div>
+        <div class="exp-desc">Self-produce an entertainment brand across TikTok, Instagram, and YouTube covering Broadway shows, curtain calls, film and TV releases, and pop culture. Handle every aspect independently: concept development, scripting, on-location filming at NYC theatres, video editing, and publishing. Coordinate with collaborators, track analytics, and adapt creative direction based on performance data.</div>
+        <div class="exp-tags">
+          <span class="tag">Producing</span><span class="tag">Scripting</span><span class="tag">Filming</span><span class="tag">Editing</span><span class="tag">Broadway</span><span class="tag">Film &amp; TV</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-dates">Mar 2024 – Present</div>
+        <div class="exp-company">Theatr App</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Brand Ambassador</div>
+        <div class="exp-desc">Public-facing advocate for a Broadway-focused app. Create original promotional content, collaborate with the brand team on messaging strategy, and stay current on productions, casting, and industry trends. Demonstrates ability to represent a media brand authentically while engaging a niche audience.</div>
+        <div class="exp-tags">
+          <span class="tag">Brand Partnerships</span><span class="tag">Content Strategy</span><span class="tag">Broadway</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-dates">Jun 2024 – Present</div>
+        <div class="exp-company">Levy Konigsberg LLP</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Paralegal / Client Advocate</div>
+        <div class="exp-desc">Manage high-volume communications, coordinate complex scheduling, and prepare detailed case materials in a fast-paced professional environment. The organizational discipline and composure under pressure developed here translate directly to production coordination and PA work.</div>
+        <div class="exp-tags">
+          <span class="tag">Coordination</span><span class="tag">Scheduling</span><span class="tag">Communication</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="exp-dates">Dec 2019 – Dec 2021</div>
+        <div class="exp-company">Alpha Omicron Pi</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Director of Member Experience</div>
+        <div class="exp-desc">Produced and hosted live programming and events for 200+ members, building strong instincts for run-of-show management, live audience engagement, and large-scale event logistics. Managed onboarding through storytelling-driven workshops and collaborated with national leadership on branding initiatives.</div>
+        <div class="exp-tags">
+          <span class="tag">Live Events</span><span class="tag">Run-of-Show</span><span class="tag">200+ Attendees</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="skills-section" id="skills">
+  <p class="section-label">What I Bring</p>
+  <h2 class="section-title">Skills</h2>
+  <div class="skills-grid">
+
+    <div class="skill-card">
+      <div class="skill-icon">🎬</div>
+      <div class="skill-name">Production</div>
+      <ul class="skill-items">
+        <li>Content development &amp; scripting</li>
+        <li>On-location filming</li>
+        <li>Video editing (Premiere / CapCut)</li>
+        <li>Run-of-show coordination</li>
+        <li>Shoot logistics &amp; scheduling</li>
+      </ul>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">📱</div>
+      <div class="skill-name">Digital &amp; Social</div>
+      <ul class="skill-items">
+        <li>TikTok, Instagram, YouTube</li>
+        <li>Audience analytics &amp; growth</li>
+        <li>Community management</li>
+        <li>Brand voice &amp; strategy</li>
+        <li>Short-form video content</li>
+      </ul>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-icon">🎭</div>
+      <div class="skill-name">Entertainment &amp; Ops</div>
+      <ul class="skill-items">
+        <li>Broadway &amp; theatre knowledge</li>
+        <li>Film &amp; TV industry awareness</li>
+        <li>Event coordination</li>
+        <li>Microsoft Office &amp; Google Workspace</li>
+        <li>Bilingual: Conversational Farsi</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <p class="section-label">Let's Work Together</p>
+  <h2 class="section-title">Get In Touch</h2>
+  <p class="contact-sub">I'm actively looking for production assistant opportunities in film, TV, Broadway, and media. If you're building something, I want to help make it happen.</p>
+  <div class="contact-links">
+    <a href="mailto:donyarabian@gmail.com" class="contact-link">donyarabian@gmail.com</a>
+    <a href="https://www.tiktok.com/@donyabackstage" target="_blank" class="contact-link">@donyabackstage</a>
+    <a href="tel:4089167404" class="contact-link">(408) 916-7404</a>
+  </div>
+  <a href="mailto:donyarabian@gmail.com" class="btn btn-outline">Say Hello →</a>
+</section>
+
+<footer>
+  © 2026 Donya Arabian · New York City · All rights reserved
+</footer>
+
+</body>
+</html>
